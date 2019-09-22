@@ -3,10 +3,9 @@ import json
 
 import requests
 import sys
-import proxy
+from .proxy import get_headers
 
-import tweet
-
+from .tweet import Tweet
 
 class TwitterScraper( object ):
 
@@ -43,7 +42,7 @@ class TwitterScraper( object ):
     tweets = soup.find_all("li", {"data-item-type": "tweet"})
 
     for bs4_tweet in tweets:
-        tweet_text = tweet.Tweet(content_type, bs4_tweet).get_tweet_text()
+        tweet_text = Tweet(content_type, bs4_tweet).get_tweet_text()
         tweets_list.append(tweet_text)
 
     print(str(len(tweets_list)) + " tweets found.")
@@ -81,6 +80,6 @@ class TwitterScraper( object ):
     return tweets_list
 
   def request(self, url):
-    headers = proxy.get_headers()
+    headers = get_headers()
     response = requests.get(url, headers=headers)
     return response
