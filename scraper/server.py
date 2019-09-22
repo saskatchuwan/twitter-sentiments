@@ -1,11 +1,7 @@
 from flask import Flask, jsonify
 
-import sys
-sys.path.insert(0, '/Users/kathrynchu/src/twitter-sentiments/scraper/src')
-
 from src.search_scraper import SearchScraper
 from src.user_scraper import UserScraper
-
 
 app = Flask(__name__)
 

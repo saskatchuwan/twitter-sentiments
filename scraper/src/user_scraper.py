@@ -2,10 +2,8 @@ from bs4 import BeautifulSoup
 import json
 
 import requests
-import sys
 
-import tweet
-from twitter_scraper import TwitterScraper
+from .twitter_scraper import TwitterScraper
 
 class UserScraper( TwitterScraper ):
 
