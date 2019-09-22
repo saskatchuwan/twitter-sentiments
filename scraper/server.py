@@ -24,3 +24,6 @@ def search(query):
     scraper = SearchScraper() 
     results = scraper.perform_scrape(query)
     return jsonify(result=results)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int("5000"), debug=False)

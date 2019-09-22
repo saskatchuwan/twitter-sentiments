@@ -4,8 +4,8 @@ WORKDIR /twitter-sentiments/scraper
 
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 EXPOSE 5000
 
-CMD [ "bash", "./run.sh"]
+CMD [ "python3", "server.py"]
