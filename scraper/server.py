@@ -1,23 +1,26 @@
-from flask import Flask
+from flask import Flask, jsonify
+
 import sys
+sys.path.insert(0, '/Users/kathrynchu/src/twitter-sentiments/scraper/src')
 
-# sys.path.insert(0, '/Users/kathrynchu/src/twitter-sentiments/scraper/src')
-# from search_scraper import SearchScraper
-# from user_scraper import UserScraper
+from src.search_scraper import SearchScraper
+from src.user_scraper import UserScraper
 
-# creates a Flask application, named app
+
 app = Flask(__name__)
 
-
-@app.route("/")
+@app.route("/", methods=['GET'])
 def hello():
-    message = "Hello, World"
-    return 'Hello, World!'
+    return "This is my twitter scraper!"
 
-# if __name__ == '__main__':
-#   # scraper = SearchScraper() 
-#   # print(scraper.perform_scrape('avocadoes'))
+@app.route("/user/<username>", methods=['GET'])
+def user(username):
+    scraper = UserScraper() 
+    results = scraper.perform_scrape(username)
+    return jsonify(result=results)
 
-#   scraper = UserScraper() 
-#   print(scraper.perform_scrape('Call_Me_Dutch'))
-
+@app.route("/search/<query>", methods=['GET'])
+def search(query):
+    scraper = SearchScraper() 
+    results = scraper.perform_scrape(query)
+    return jsonify(result=results)
