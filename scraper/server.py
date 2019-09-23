@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 
 from src.search_scraper import SearchScraper
@@ -22,4 +23,17 @@ def search(query):
     return jsonify(result=results)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int("5000"), debug=False)
+    host = "0.0.0.0"
+    port = 5000
+
+    try:
+        host = os.environ['SCRAPER_HOSTNAME']
+    except KeyError:
+        print("Hostname not found in environment. Reverting to default value: " + host)
+    
+    try:
+        port = os.environ['SCRAPER_PORT']
+    except KeyError:
+        print("Port not found in environment. Reverting to default value: " + str(port))
+    
+    app.run(host=host, port=int(port), debug=False)
