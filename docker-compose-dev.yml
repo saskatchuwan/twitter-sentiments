@@ -2,6 +2,19 @@ version: '3'
 services:
 
   twitter-scraper:
+    image: hlkchu/twitter-analyzer:dev
+    deploy:
+      replicas: 1
+    ports:
+      - "5001:5001"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+    # environment:
+
+  twitter-scraper:
     image: hlkchu/twitter-scraper:dev
     deploy:
       replicas: 1
